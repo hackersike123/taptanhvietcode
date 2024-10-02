@@ -1,34 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Định nghĩa cấu trúc Node
+// Dinh nghia cau truc Node
 typedef struct Node {
     int data;
     struct Node* next;
 } Node;
 
-// Khởi tạo danh sách liên kết
+// Khoi tao danh sach lien ket
 typedef struct {
     Node* head;
     Node* tail;
-} LinkedList;
+} DanhSachLienKet;
 
-// Khởi tạo danh sách rỗng
-void initList(LinkedList* list) {
-    list->head = NULL;
-    list->tail = NULL;
+// Khoi tao danh sach rong
+void khoiTaoDanhSach(DanhSachLienKet* ds) {
+    ds->head = NULL;
+    ds->tail = NULL;
 }
 
-// Kiểm tra danh sách có rỗng hay không
-int isEmpty(LinkedList* list) {
-    return list->head == NULL;
+// Kiem tra danh sach co rong hay khong
+int danhSachRong(DanhSachLienKet* ds) {
+    return ds->head == NULL;
 }
 
-// Tạo một nút chứa dữ liệu X
-Node* createNode(int x) {
+// Tao mot nut chua du lieu X
+Node* taoNode(int x) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     if (newNode == NULL) {
-        printf("Không đủ bộ nhớ để cấp phát.\n");
+        printf("Khong du bo nho de cap phat.\n");
         exit(1);
     }
     newNode->data = x;
@@ -36,21 +36,21 @@ Node* createNode(int x) {
     return newNode;
 }
 
-// Thêm phần tử mới vào cuối danh sách
-void addTail(LinkedList* list, int x) {
-    Node* newNode = createNode(x);
-    if (isEmpty(list)) {
-        list->head = newNode;
-        list->tail = newNode;
+// Them phan tu moi vao cuoi danh sach
+void themCuoi(DanhSachLienKet* ds, int x) {
+    Node* newNode = taoNode(x);
+    if (danhSachRong(ds)) {
+        ds->head = newNode;
+        ds->tail = newNode;
     } else {
-        list->tail->next = newNode;
-        list->tail = newNode;
+        ds->tail->next = newNode;
+        ds->tail = newNode;
     }
 }
 
-// Xuất danh sách ra màn hình
-void printList(LinkedList* list) {
-    Node* current = list->head;
+// Xuat danh sach ra man hinh
+void xuatDanhSach(DanhSachLienKet* ds) {
+    Node* current = ds->head;
     while (current != NULL) {
         printf("%d ", current->data);
         current = current->next;
@@ -58,24 +58,24 @@ void printList(LinkedList* list) {
     printf("\n");
 }
 
-// Hàm nhập dữ liệu
-void inputList(LinkedList* list) {
+// Ham nhap du lieu
+void nhapDanhSach(DanhSachLienKet* ds) {
     int n, x;
-    printf("Nhập số lượng phần tử: ");
+    printf("Nhap so luong phan tu: ");
     scanf("%d", &n);
     for (int i = 0; i < n; i++) {
-        printf("Nhập phần tử thứ %d: ", i + 1);
+        printf("Nhap phan tu thu %d: ", i + 1);
         scanf("%d", &x);
-        addTail(list, x);
+        themCuoi(ds, x);
     }
 }
 
-// Hàm main
+// Ham main
 int main() {
-    LinkedList list;
-    initList(&list);
-    inputList(&list);
-    printf("Danh sách các số nguyên: ");
-    printList(&list);
+    DanhSachLienKet ds;
+    khoiTaoDanhSach(&ds);
+    nhapDanhSach(&ds);
+    printf("Danh sach cac so nguyen: ");
+    xuatDanhSach(&ds);
     return 0;
 }
