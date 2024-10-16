@@ -119,18 +119,21 @@ void hienThiDanhSach(struct Node* head) {
     }
     printf("NULL\n");
 }
+void nhapDanhSach(struct Node** head) {
+    int n, data;
+    printf("Nhập số lượng phần tử: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        printf("Nhập dữ liệu cho phần tử %d: ", i + 1);
+        scanf("%d", &data);
+        themCuoi(head, data);
+    }
+}
 
 int main() {
     struct Node* head = NULL;
     int chon, data, position;
-
-    // Thêm sẵn dãy số bất kì
-    int array[] = {5, 15, 25, 35, 45};
-    for (int i = 0; i < 5; i++) {
-        themCuoi(&head, array[i]);
-    }
-    hienThiDanhSach(head);
-
+    nhapDanhSach(&head);
     while (1) {
         printf("\nMenu:\n");
         printf("1. Thêm đầu\n");
@@ -143,7 +146,6 @@ int main() {
         printf("8. Thoát\n");
         printf("Chọn: ");
         scanf("%d", &chon);
-
         switch (chon) {
             case 1:
                 printf("Nhập dữ liệu: ");
@@ -183,6 +185,5 @@ int main() {
                 printf("Lựa chọn không hợp lệ.\n");
         }
     }
-
     return 0;
 }
